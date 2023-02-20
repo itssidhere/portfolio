@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,18 +17,20 @@ class _HomepageState extends State<Homepage> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        Get.dialog(AlertDialog(
-            title: const Text(
-              'Don\'t judge me, I am still making this website!',
-              textAlign: TextAlign.center,
-            ),
-            content: LottieBuilder.network(
-              'https://assets2.lottiefiles.com/packages/lf20_4s3kvfcn.json',
-            )));
+    if (!kDebugMode) {
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          Get.dialog(AlertDialog(
+              title: const Text(
+                'Don\'t judge me, I am still making this website!',
+                textAlign: TextAlign.center,
+              ),
+              content: LottieBuilder.network(
+                'https://assets2.lottiefiles.com/packages/lf20_4s3kvfcn.json',
+              )));
+        });
       });
-    });
+    }
     super.initState();
   }
 
@@ -170,35 +173,101 @@ class _HomepageState extends State<Homepage> {
                     style: Get.textTheme.displayLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
 
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 300.h,
-                      child: NavigationRail(
-                          //backgroundColor: Colors.transparent,
-                          useIndicator: true,
-                          labelType: NavigationRailLabelType.selected,
-                          onDestinationSelected: (value) {
-                            setState(() {
-                              _selectedWorkIndex = value;
-                            });
-                          },
-                          destinations: const <NavigationRailDestination>[
-                            NavigationRailDestination(
-                              icon: Icon(Icons.favorite_border),
-                              selectedIcon: Icon(Icons.favorite),
-                              label: Text('U of A'),
-                            ),
-                            NavigationRailDestination(
-                              icon: Icon(Icons.bookmark_border),
-                              selectedIcon: Icon(Icons.book),
-                              label: Text('ImbueDesk'),
-                            ),
-                          ],
-                          selectedIndex: _selectedWorkIndex),
-                    ),
-                  ],
+                SizedBox(height: 50.h),
+
+                SizedBox(
+                  width: 0.6.sw,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxHeight: 280),
+                        child: NavigationRail(
+                            //backgroundColor: Colors.transparent,
+
+                            useIndicator: true,
+                            labelType: NavigationRailLabelType.selected,
+                            onDestinationSelected: (value) {
+                              setState(() {
+                                _selectedWorkIndex = value;
+                              });
+                            },
+                            destinations: const <NavigationRailDestination>[
+                              NavigationRailDestination(
+                                padding: EdgeInsets.symmetric(vertical: 8.0),
+                                icon: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('images/uofa-logo.jpg'),
+                                ),
+                                label: Text('U of A'),
+                              ),
+                              NavigationRailDestination(
+                                padding: EdgeInsets.symmetric(vertical: 8.0),
+                                icon: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('images/imbue-logo.png'),
+                                ),
+                                label: Text('ImbueDesk'),
+                              ),
+                              NavigationRailDestination(
+                                padding: EdgeInsets.symmetric(vertical: 8.0),
+                                icon: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('images/mohalla-logo.png'),
+                                ),
+                                label: Text('Mohalla'),
+                              ),
+                            ],
+                            selectedIndex: _selectedWorkIndex),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Flexible(
+                        child: Visibility(
+                            child: Container(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Graduate Research Assistant @ U of A',
+                                    style: Get.textTheme.titleMedium),
+                                SizedBox(height: 8.0),
+                                Text('Oct 2020 - Present',
+                                    style: Get.textTheme.bodySmall),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '• Developed an app that offered real-time public sentiment insights to politicians using flutter and flask',
+                                ),
+                                SizedBox(height: 20.0),
+                                Text(
+                                  '• Developing a mobile and hololens app that allows the client to visualize and interact with data in 3D space using Unity, C# and firebase',
+                                ),
+                              ],
+                            )),
+                            visible: _selectedWorkIndex == 0),
+                      ),
+                      Visibility(
+                          child: Container(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Software Developer @ ImbueDesk',
+                                  style: Get.textTheme.titleMedium),
+                            ],
+                          )),
+                          visible: _selectedWorkIndex == 1),
+                      Visibility(
+                          child: Container(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Founder @ Mohalla',
+                                  style: Get.textTheme.titleMedium),
+                            ],
+                          )),
+                          visible: _selectedWorkIndex == 2),
+                    ],
+                  ),
                 )
               ],
             ),
