@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -12,6 +13,23 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   var _myPicColor = Get.theme.colorScheme.primary;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        Get.dialog(AlertDialog(
+            title: const Text(
+              'Don\'t judge me, I am still making this website!',
+              textAlign: TextAlign.center,
+            ),
+            content: LottieBuilder.network(
+              'https://assets2.lottiefiles.com/packages/lf20_4s3kvfcn.json',
+            )));
+      });
+    });
+    super.initState();
+  }
 
   int _selectedWorkIndex = 0;
   @override
