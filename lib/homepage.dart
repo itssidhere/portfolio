@@ -179,6 +179,7 @@ class _HomepageState extends State<Homepage> {
                   width: 0.6.sw,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       ConstrainedBox(
                         constraints: const BoxConstraints(maxHeight: 280),
@@ -223,49 +224,41 @@ class _HomepageState extends State<Homepage> {
                       const SizedBox(
                         width: 20,
                       ),
-                      Flexible(
-                        child: Visibility(
-                            child: Container(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Graduate Research Assistant @ U of A',
-                                    style: Get.textTheme.titleMedium),
-                                SizedBox(height: 8.0),
-                                Text('Oct 2020 - Present',
-                                    style: Get.textTheme.bodySmall),
-                                SizedBox(height: 20.0),
-                                Text(
-                                  '• Developed an app that offered real-time public sentiment insights to politicians using flutter and flask',
-                                ),
-                                SizedBox(height: 20.0),
-                                Text(
-                                  '• Developing a mobile and hololens app that allows the client to visualize and interact with data in 3D space using Unity, C# and firebase',
-                                ),
-                              ],
-                            )),
-                            visible: _selectedWorkIndex == 0),
-                      ),
-                      Visibility(
-                          child: Container(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Software Developer @ ImbueDesk',
-                                  style: Get.textTheme.titleMedium),
+                      if (_selectedWorkIndex == 0)
+                        Flexible(
+                          child: const WorkBody(
+                            title: 'Graduate Research Assistant @ U of A',
+                            date: "Oct 2020 - Present",
+                            body: [
+                              "Developed an app that offered real-time public sentiment insights to politicians using flutter and flask",
+                              "Developing a mobile and hololens app that allows the client to visualize and interact with data in 3D space using Unity, C# and firebase"
                             ],
-                          )),
-                          visible: _selectedWorkIndex == 1),
-                      Visibility(
-                          child: Container(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Founder @ Mohalla',
-                                  style: Get.textTheme.titleMedium),
+                          ),
+                        ),
+                      if (_selectedWorkIndex == 1)
+                        Flexible(
+                          child: WorkBody(
+                            title: 'Software Developer @ ImbueDesk',
+                            date: 'Oct 2020 - March 2022',
+                            body: [
+                              "Implemented an environmental conservation app, resulting in a 20% increase in user engagement and a 15% reduction in carbon footprint",
+                              "Incorporated Flutter as the primary framework and Firebase as the backend to build the app, resulting in a 25% reduction in development time",
+                              "Coordinated the implementation of features that promote sustainability and environmental conservation, including carbon offsetting methods, design, and integration of technologies such as Flutter and Firebase"
                             ],
-                          )),
-                          visible: _selectedWorkIndex == 2),
+                          ),
+                        ),
+                      if (_selectedWorkIndex == 2)
+                        Flexible(
+                            child: WorkBody(
+                          title: 'Founder @ Mohalla',
+                          date: 'Aug 2019 - Present',
+                          body: [
+                            "Founded Mohalla to have a platform where people can watch videos together, and grew it to 300k users/year and 1.7M ₹/year in revenue",
+                            "The app is built using Flutter and Firebase along with Node.js",
+                            "Things I've learned from building this app: Flutter, Firebase, Serverless, Node.js, Designing securtiy rules for Firebase, Marketing, and more",
+                            "One of the top free social apps in India and Pakistan",
+                          ],
+                        ))
                     ],
                   ),
                 )
@@ -301,6 +294,36 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class WorkBody extends StatelessWidget {
+  final String title;
+  final String date;
+  final List<String> body;
+  const WorkBody({
+    super.key,
+    required this.title,
+    required this.date,
+    required this.body,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: Get.textTheme.titleMedium),
+        const SizedBox(height: 8.0),
+        Text(date, style: Get.textTheme.bodySmall),
+        ...body
+            .map((e) => Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Text('• $e'),
+                ))
+            .toList(),
+      ],
     );
   }
 }
