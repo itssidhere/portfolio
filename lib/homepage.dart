@@ -256,7 +256,7 @@ class _HomepageState extends State<Homepage> {
                             "Founded Mohalla to have a platform where people can watch videos together, and grew it to 300k users/year and 1.7M ₹/year in revenue",
                             "The app is built using Flutter and Firebase along with Node.js",
                             "Things I've learned from building this app: Flutter, Firebase, Serverless, Node.js, Designing securtiy rules for Firebase, Marketing, and more",
-                            "One of the top free social apps in India and Pakistan",
+                            "One of the top free social apps in South Asia",
                           ],
                         ))
                     ],
