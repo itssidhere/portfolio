@@ -12,10 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.6.1
+  font_awesome_flutter: ^10.4.0
   get: ^4.6.5
   google_fonts: ^4.0.3
   lottie: ^2.2.0
   timelines: ^0.1.0
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:
