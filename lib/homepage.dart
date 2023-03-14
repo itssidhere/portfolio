@@ -541,6 +541,16 @@ class _HomepageState extends State<Homepage> {
                     },
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: IconButton(
+                    icon: Icon(FontAwesomeIcons.stackOverflow),
+                    onPressed: () {
+                      launchUrlString(
+                          'https://stackoverflow.com/users/6051666/siddharth-jha');
+                    },
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   height: 0.25.sh,
