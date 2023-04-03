@@ -20,6 +20,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   var _myPicColor = Get.theme.colorScheme.primary;
   final _scrollController = ScrollController();
+  var isMobile = false;
 
   @override
   void initState() {
@@ -48,55 +49,65 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: _getLogo(scale: 0.8),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextButton(
-                onPressed: () {
-                  WidgetsBinding.instance!.addPostFrameCallback((_) {
-                    _scrollController.animateTo(0.5.sh,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  });
-                },
-                child: const Text('About')),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextButton(
-                onPressed: () {
-                  WidgetsBinding.instance!.addPostFrameCallback((_) {
-                    _scrollController.animateTo(1.5.sh,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  });
-                },
-                child: const Text('Experience')),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextButton(
-                onPressed: () {
-                  WidgetsBinding.instance!.addPostFrameCallback((_) {
-                    _scrollController.animateTo(2.5.sh,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  });
-                },
-                child: const Text('Projects')),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextButton(
-                onPressed: () {
-                  launchUrlString('mailto: sidjha0001@gmail.com');
-                },
-                child: const Text('Contact')),
-          ),
-        ],
+        centerTitle: isMobile,
+        actions: isMobile
+            ? []
+            : [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextButton(
+                      onPressed: () {
+                        WidgetsBinding.instance!.addPostFrameCallback((_) {
+                          _scrollController.animateTo(0.5.sh,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut);
+                        });
+                      },
+                      child: const Text('About')),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextButton(
+                      onPressed: () {
+                        WidgetsBinding.instance!.addPostFrameCallback((_) {
+                          _scrollController.animateTo(1.5.sh,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut);
+                        });
+                      },
+                      child: const Text('Experience')),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextButton(
+                      onPressed: () {
+                        WidgetsBinding.instance!.addPostFrameCallback((_) {
+                          _scrollController.animateTo(2.5.sh,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut);
+                        });
+                      },
+                      child: const Text('Projects')),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextButton(
+                      onPressed: () {
+                        launchUrlString('mailto: sidjha0001@gmail.com');
+                      },
+                      child: const Text('Contact')),
+                ),
+              ],
       ),
       body: LayoutBuilder(builder: (context, constraints) {
-        bool isMobile = constraints.maxWidth < 900;
+        bool isM = constraints.maxWidth < 900;
+        if (isM != isMobile) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              isMobile = isM;
+            });
+          });
+        }
         bool showSideBar = !isMobile;
         var bodyPadding = isMobile
             ? EdgeInsets.symmetric(horizontal: 0.08.sw, vertical: 16.0)
