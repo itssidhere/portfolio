@@ -386,6 +386,7 @@ class _HomepageState extends State<Homepage> {
                             Image.network(
                               'https://images.unsplash.com/photo-1488509082528-cefbba5ad692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
                               height: 0.6.sh,
+                              fit: BoxFit.cover,
                               width: isMobile ? 1.sw : 0.4.sw,
                             ),
                             Positioned.fill(
@@ -465,6 +466,7 @@ class _HomepageState extends State<Homepage> {
                             Image.network(
                               'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
                               height: 0.6.sh,
+                              fit: BoxFit.cover,
                               width: isMobile ? 1.sw : 0.4.sw,
                             ),
                             Positioned.fill(
@@ -519,6 +521,86 @@ class _HomepageState extends State<Homepage> {
                                               },
                                               child: const Text(
                                                   'View on Play Store')),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ))
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 50.h),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Get.theme.colorScheme.primaryContainer,
+                            width: 1,
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Image.network(
+                              'https://images.unsplash.com/photo-1602906530215-1bf5f4925279?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=327&q=80',
+                              height: 0.6.sh,
+                              fit: BoxFit.cover,
+                              width: isMobile ? 1.sw : 0.4.sw,
+                            ),
+                            Positioned.fill(
+                                child: ClipRRect(
+                              child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                child: Container(
+                                  height: 0.6.sh,
+                                  width: isMobile ? 1.sw : 0.4.sw,
+                                  color: Get.theme.colorScheme.primaryContainer
+                                      .withOpacity(0.3),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 32.0,
+                                        right: 32.0,
+                                        bottom: 32.0,
+                                        top: 100.0),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Featured Project',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Get.theme.colorScheme
+                                                      .primary)),
+                                          Text('VotewiseIQ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 30)),
+                                          SizedBox(height: 20.h),
+                                          Text(
+                                              'VotewiseIQ is a powerful platform that provides live public sentiment analysis on a variety of topics. It is built using the Flutter framework for the user interface, Flask for the backend, and Firebase for data storage and real-time updates'),
+                                          SizedBox(height: 20.h),
+                                          Wrap(
+                                            spacing: 10,
+                                            runSpacing: 10,
+                                            children: [
+                                              Text('Flutter'),
+                                              Text('Dart'),
+                                              Text('Firebase'),
+                                              Text('Python'),
+                                              Text('Flask'),
+                                            ],
+                                          ),
+                                          SizedBox(height: 20.h),
+                                          OutlinedButton(
+                                              onPressed: () {
+                                                launchUrlString(
+                                                    'https://github.com/itssidhere/votewiseiq');
+                                              },
+                                              child:
+                                                  const Text('View on Github')),
                                         ],
                                       ),
                                     ),
