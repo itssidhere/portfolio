@@ -352,8 +352,10 @@ class _HomepageState extends State<Homepage> {
                                   title: 'Graduate Research Assistant @ U of A',
                                   date: "Oct 2022 - April 2023",
                                   body: [
-                                    "Developed an app that offered real-time public sentiment insights to politicians using flutter and flask",
-                                    "Developing a mobile and hololens app that allows the client to visualize and interact with data in 3D space using Unity, C# and firebase"
+                                    "Developed an app that offered real-time public sentiment insights to politicians, improving their understanding of voter opinions and preferences, by at least 10%",
+                                    "Trained a machine learning model on 10,000 sizes of Twitter data",
+                                    "Deployed an API to get up to 1000 latest tweets from Twitter on the given query and use the machine learning model to classify the sentiment of each with either positive or negative",
+                                    "Designed the front-end of an app in Flutter web, by closely collaborating with the client and understanding the app's use cases for politicians, resulting in at least 20% faster app development time"
                                   ],
                                 ),
                               ),

@@ -26,7 +26,7 @@ class _MainAppState extends State<MainApp> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 2300), () {
+    Future.delayed(const Duration(milliseconds: 2170), () {
       shouldShowSplash.value = false;
     });
     super.initState();
@@ -65,11 +65,12 @@ class _MainAppState extends State<MainApp> {
             ),
             themeMode: ThemeMode.dark,
             home: Obx(() {
-              if (shouldShowSplash.value) {
-                return const SplashScreen();
-              } else {
-                return const Homepage();
-              }
+              return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 350),
+                  switchInCurve: Curves.easeInOutCubic,
+                  child: shouldShowSplash.value
+                      ? const SplashScreen()
+                      : const Homepage());
             }),
           );
         });
