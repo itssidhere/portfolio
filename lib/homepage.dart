@@ -357,7 +357,7 @@ class _HomepageState extends State<Homepage> {
                                   ],
                                 ),
                               ),
-                            if (_selectedWorkIndex == 1)
+                            if (_selectedWorkIndex == 2)
                               const Flexible(
                                 child: WorkBody(
                                   title: 'Software Developer @ ImbueDesk',
@@ -369,7 +369,7 @@ class _HomepageState extends State<Homepage> {
                                   ],
                                 ),
                               ),
-                            if (_selectedWorkIndex == 2)
+                            if (_selectedWorkIndex == 3)
                               const Flexible(
                                   child: WorkBody(
                                 title: 'Founder @ Mohalla',
