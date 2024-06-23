@@ -53,7 +53,7 @@ export const DATA = {
 
   work: [
     {
-      company: "C Tribe",
+      company: "C-Tribe",
       href: "https://www.ctribefestival.com/",
       badges: [],
       location: "Remote",
