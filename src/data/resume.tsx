@@ -111,18 +111,6 @@ export const DATA = {
       description:
         "Developed an app to track and help reduce carbon emissions for businesses, individuals, and governments. The app used machine learning to predict carbon emissions based on user data and provided recommendations to reduce emissions. The app was used by over 5,000 users and helped reduce carbon emissions by 20%.",
     },
-    {
-      company: "Mohalla",
-      href: "https://mitremedia.com/",
-      badges: [],
-      location: "Toronto, ON",
-      title: "Founder & Developer",
-      logoUrl: "/mohalla.png",
-      start: "Oct 2022",
-      end: "Aug 2019",
-      description:
-        "Designed and implemented a robust password encryption and browser cookie storage system in Ruby on Rails. Leveraged the Yahoo finance API to develop the dividend.com equity screener",
-    },
   ],
   education: [
 
@@ -153,40 +141,35 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Chat Collect",
-      href: "https://chatcollect.com",
-      dates: "Jan 2024 - Feb 2024",
+      title: "Mohalla",
+      href: "https://play.google.com/store/apps/details?id=com.cluxid.mohalla&hl=en_CA",
+      dates: "Aug 2019 - Oct 2022",
       active: true,
-      description:
-        "With the release of the [OpenAI GPT Store](https://openai.com/blog/introducing-the-gpt-store), I decided to build a SaaS which allows users to collect email addresses from their GPT users. This is a great way to build an audience and monetize your GPT API usage.",
+      description: "Mohalla enables users to create chat rooms and watch videos together. I developed the app using Flutter and Firebase, and it has over 300,000 downloads on the Google Play Store.",
       technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Stripe",
-        "Shadcn UI",
-        "Magic UI",
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Node.js",
+        "Kotlin"
       ],
       links: [
         {
           type: "Website",
-          href: "https://chatcollect.com",
+          href: "https://play.google.com/store/apps/details?id=com.cluxid.mohalla&hl=en_CA",
           icon: <Icons.globe className="size-3" />,
         },
       ],
       image: "",
       video:
-        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
+        "https://firebasestorage.googleapis.com/v0/b/portfolio-14330.appspot.com/o/Mohalla%20Theatre%20Room%20__%20Mohalla%20-%20Online%20Chat%20Rooms%2C%20Watch%20Together.mp4?alt=media&token=179af473-6cd9-421f-861c-a8e9134d1034",
     },
     {
-      title: "Magic UI",
-      href: "https://magicui.design",
+      title: "VotewiseIQ",
+      href: "https://github.com/itssidhere/votewiseiq",
       dates: "June 2023 - Present",
       active: true,
-      description:
-        "Designed, developed and sold animated UI components for developers.",
+      description:"VotewiseIQ is a powerful platform that provides live public sentiment analysis on a variety of topics. It is built using the Flutter for the user interface, Flask for the backend, and Firebase for data storage and real-time updates. With VotewiseIQ, you can gain valuable insights into the opinions and attitudes of the general public in real-time",
       technologies: [
         "Next.js",
         "Typescript",
@@ -198,82 +181,17 @@ export const DATA = {
         "Magic UI",
       ],
       links: [
-        {
-          type: "Website",
-          href: "https://magicui.design",
-          icon: <Icons.globe className="size-3" />,
-        },
+  
         {
           type: "Source",
-          href: "https://github.com/magicuidesign/magicui",
+          href: "https://github.com/itssidhere/votewiseiq",
           icon: <Icons.github className="size-3" />,
         },
       ],
       image: "",
-      video: "https://cdn.magicui.design/bento-grid.mp4",
+      video: "https://github.com/itssidhere/votewiseiq/assets/16454736/b7e12235-b405-4b83-9544-3287db7acd52",
     },
-    {
-      title: "llm.report",
-      href: "https://llm.report",
-      dates: "April 2023 - September 2023",
-      active: true,
-      description:
-        "Developed an open-source logging and analytics platform for OpenAI: Log your ChatGPT API requests, analyze costs, and improve your prompts.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Magic UI",
-        "Stripe",
-        "Cloudflare Workers",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://llm.report",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/dillionverma/llm.report",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "https://cdn.llm.report/openai-demo.mp4",
-    },
-    {
-      title: "Automatic Chat",
-      href: "https://automatic.chat",
-      dates: "April 2023 - March 2024",
-      active: true,
-      description:
-        "Developed an AI Customer Support Chatbot which automatically responds to customer support tickets using the latest GPT models.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Magic UI",
-        "Stripe",
-        "Cloudflare Workers",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://automatic.chat",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video:
-        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
-    },
+ 
   ],
   hackathons: [
     {
