@@ -155,7 +155,7 @@ export const DATA = {
       ],
       links: [
         {
-          type: "Website",
+          type: "Playstore",
           href: "https://play.google.com/store/apps/details?id=com.cluxid.mohalla&hl=en_CA",
           icon: <Icons.globe className="size-3" />,
         },
