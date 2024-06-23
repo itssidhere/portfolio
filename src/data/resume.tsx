@@ -167,7 +167,7 @@ export const DATA = {
     {
       title: "VotewiseIQ",
       href: "https://github.com/itssidhere/votewiseiq",
-      dates: "June 2023 - Present",
+      dates: "June 2023 - July 2023",
       active: true,
       description:"VotewiseIQ is a powerful platform that provides live public sentiment analysis on a variety of topics. It is built using the Flutter for the user interface, Flask for the backend, and Firebase for data storage and real-time updates. With VotewiseIQ, you can gain valuable insights into the opinions and attitudes of the general public in real-time",
       technologies: [
