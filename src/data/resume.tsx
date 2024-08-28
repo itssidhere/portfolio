@@ -166,6 +166,14 @@ export const DATA = {
       active: true,
       description:
         "DailyReadsAI is a web app that uses AI to send you a personalized book excerpts every day.",
+      technologies: [
+        "Next.js",
+        "Typescript",
+        "TailwindCSS",
+        "Supabase",
+        "OpenAI",
+        "Stripe",
+      ],
       links: [
         {
           type: "Website",
