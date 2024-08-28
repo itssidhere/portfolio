@@ -97,7 +97,8 @@ export const DATA = {
       logoUrl: "/uofa.jpg",
       start: "Oct 2022",
       end: "April 2023",
-      description: "Developed an app to scrape and analyze data from Twitter for a given search term using Python, Flask, and Firebase. The app included sentiment analysis features and was used to predict vote results. It also helped the university analyze public sentiment on various topics.",
+      description:
+        "Developed an app to scrape and analyze data from Twitter for a given search term using Python, Flask, and Firebase. The app included sentiment analysis features and was used to predict vote results. It also helped the university analyze public sentiment on various topics.",
     },
     {
       company: "ImbueDesk",
@@ -113,7 +114,6 @@ export const DATA = {
     },
   ],
   education: [
-
     {
       school: "University of Alberta",
       href: "https://uwaterloo.ca",
@@ -145,14 +145,9 @@ export const DATA = {
       href: "https://play.google.com/store/apps/details?id=com.cluxid.mohalla&hl=en_CA",
       dates: "Aug 2019 - Oct 2022",
       active: true,
-      description: "Mohalla enables users to create chat rooms and watch videos together. I developed the app using Flutter and Firebase, and it has over 300,000 downloads on the Google Play Store.",
-      technologies: [
-        "Flutter",
-        "Dart",
-        "Firebase",
-        "Node.js",
-        "Kotlin"
-      ],
+      description:
+        "Mohalla enables users to create chat rooms and watch videos together. I developed the app using Flutter and Firebase, and it has over 300,000 downloads on the Google Play Store.",
+      technologies: ["Flutter", "Dart", "Firebase", "Node.js", "Kotlin"],
       links: [
         {
           type: "Playstore",
@@ -165,23 +160,32 @@ export const DATA = {
         "https://firebasestorage.googleapis.com/v0/b/portfolio-14330.appspot.com/o/Mohalla%20Theatre%20Room%20__%20Mohalla%20-%20Online%20Chat%20Rooms%2C%20Watch%20Together.mp4?alt=media&token=179af473-6cd9-421f-861c-a8e9134d1034",
     },
     {
+      title: "DailyReadsAI",
+      href: "https://www.dailyreadsai.com/",
+      dates: "Jan 2024 - Current",
+      active: true,
+      description:
+        "DailyReadsAI is a web app that uses AI to send you a personalized book excerpts every day.",
+      links: [
+        {
+          type: "Website",
+          href: "https://www.dailyreadsai.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://firebasestorage.googleapis.com/v0/b/portfolio-14330.appspot.com/o/dailyreadsai.mp4?alt=media&token=1ecdf439-a20d-400a-bb95-70f23dd21dab",
+    },
+    {
       title: "VotewiseIQ",
       href: "https://github.com/itssidhere/votewiseiq",
       dates: "June 2023 - July 2023",
       active: true,
-      description:"VotewiseIQ is a powerful platform that provides live public sentiment analysis on a variety of topics. It is built using the Flutter for the user interface, Flask for the backend, and Firebase for data storage and real-time updates. With VotewiseIQ, you can gain valuable insights into the opinions and attitudes of the general public in real-time",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Stripe",
-        "Shadcn UI",
-        "Magic UI",
-      ],
+      description:
+        "VotewiseIQ is a powerful platform that provides live public sentiment analysis on a variety of topics. It is built using the Flutter for the user interface, Flask for the backend, and Firebase for data storage and real-time updates. With VotewiseIQ, you can gain valuable insights into the opinions and attitudes of the general public in real-time",
+      technologies: ["Python", "Flask", "Firebase", "Flutter", "Dart"],
       links: [
-  
         {
           type: "Source",
           href: "https://github.com/itssidhere/votewiseiq",
@@ -189,9 +193,9 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "https://github.com/itssidhere/votewiseiq/assets/16454736/b7e12235-b405-4b83-9544-3287db7acd52",
+      video:
+        "https://github.com/itssidhere/votewiseiq/assets/16454736/b7e12235-b405-4b83-9544-3287db7acd52",
     },
- 
   ],
   hackathons: [
     {
@@ -577,7 +581,5 @@ export const DATA = {
         },
       ],
     },
-  
-  
   ],
 } as const;
