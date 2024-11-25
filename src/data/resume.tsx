@@ -27,6 +27,9 @@ export const DATA = {
     "Dart",
     "Python",
     "Firebase",
+    "FastAPI",
+    "LangChain",
+    "LangGraph",
   ],
   contact: {
     email: "sidjha0001@gmail.com",
@@ -59,7 +62,7 @@ export const DATA = {
       location: "Remote",
       title: "Software Engineer",
       logoUrl: "/datatrei.png",
-      start: "Jan 2024",
+      start: "Sept 2024",
       end: "Current",
       description:
         "Building the next generation of AI-powered log analysis platform. A copilot for cybersecurity operations.",
