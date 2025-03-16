@@ -9,7 +9,7 @@ export const DATA = {
   description:
     "Software Engineer and Solopreneur. I love building things and helping people.",
   summary:
-    "The turning point in my life came when I built my first consumer-facing app. This experience profoundly changed and humbled my understanding of the possibilities available as a software engineer. It inspired me to pursue a master’s degree in computer science, and I’ve since had the pleasure of contributing to fast-growing startups, both as a leader and an engineer.",
+    "The turning point in my life came when I built my first consumer-facing app. This experience profoundly changed and humbled my understanding of the possibilities available as a software engineer. It inspired me to pursue a master's degree in computer science, and I've since had the pleasure of contributing to fast-growing startups, both as a leader and an engineer.",
   avatarUrl: "/me.png",
   skills: [
     "React",
@@ -56,6 +56,18 @@ export const DATA = {
 
   work: [
     {
+      company: "IronSight",
+      href: "https://ironsight.app/",
+      badges: [],
+      location: "Hybrid",
+      title: "Intermediate Software Engineer",
+      logoUrl: "/ironsight.png",
+      start: "Dec 2024",
+      end: "Current",
+      description:
+        "Developed a high-performance real-time data pipeline using MySQL, Kafka, and ClickHouse, improving data ingestion speed by 35%. Built an innovative Text-to-SQL AI agent that enables natural language queries, cutting query development time in half for non-technical users. Engineered scalable data workflows to enhance real-time analytics capabilities across the organization.",
+    },
+    {
       company: "Data Trei, Stealth Startup",
       href: "https://datatrei.com/",
       badges: [],
@@ -63,7 +75,7 @@ export const DATA = {
       title: "Software Engineer",
       logoUrl: "/datatrei.png",
       start: "Sept 2024",
-      end: "Current",
+      end: "Nov 2024",
       description:
         "Building the next generation of AI-powered log analysis platform. A copilot for cybersecurity operations.",
     },
