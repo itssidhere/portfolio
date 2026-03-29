@@ -1,0 +1,190 @@
+---
+title: "B-Trees: The Data Structure Behind Every Database"
+publishedAt: "2026-03-29"
+summary: "What is a B-Tree and how to build one from scratch in Rust."
+---
+
+## What Is a B-Tree?
+
+The B-Tree was invented by Rudolf Bayer and Edward McCreight while working at Boeing — hence the name (though the "B" has been debated endlessly). It was introduced in 1972, and despite over 50 years of research and numerous attempts to replace it, nothing has come close. B-Trees remain the backbone of virtually every database in production today.
+
+The term "B-Tree" is often used loosely to refer to both the specific data structure and the entire family — B+ Trees, B-link Trees, and other variants. Most production databases, including MySQL's InnoDB, actually implement B+ Trees (where data only lives in leaf nodes). We'll start with a classic B-Tree and cover the differences later.
+
+## What Makes It So Good?
+
+The fundamental idea is deceptively simple: **partition on sorted key ranges**. That's it. That's what makes everything fast.
+
+Take 5 keys: `(10, 6, 4, 2, 20)`. First, sort them: `(2, 4, 6, 10, 20)`. Now form partitions around them:
+
+```
+             [ 2 | 4 | 6 | 10 | 20 ]
+            /    |   |   |    |     \
+          <2   2-4  4-6 6-10 10-20  >20
+```
+
+For 5 keys, we get 6 partitions — always `N + 1`. Each partition becomes a child pointer in the tree.
+
+Because the keys are sorted, **range queries are trivial**. Need all keys between 4 and 10? Jump to the right partition and scan — left to right for ascending, right to left for descending. No need to visit every node in the tree.
+
+This is why databases don't use hash maps for their primary indexes. A hash map gives you O(1) exact lookups, but it can't answer:
+
+- `SELECT * FROM users WHERE age > 25 AND age < 40`
+- `SELECT * FROM users ORDER BY name`
+- `SELECT * FROM users WHERE name LIKE 'Sid%'`
+
+With a hash map, you'd have to scan every entry. With a B-Tree, you just walk the sorted partitions.
+
+### How MySQL Does It
+
+MySQL's InnoDB B-Tree implementation lives in [`storage/innobase/btr/btr0btr.cc`](https://github.com/mysql/mysql-server/blob/trunk/storage/innobase/btr/btr0btr.cc). InnoDB uses 16KB pages with a typical degree of 500+, meaning each node holds hundreds of keys. Even tables with millions of rows stay within 3-4 levels deep — that's 3-4 disk reads to find any row.
+
+## Degree
+
+The **degree** of a B-Tree (often called `t`) controls how many keys fit in each node:
+
+- Max keys per node: `2t - 1`
+- Max children per node: `2t`
+- Min keys (except root): `t - 1`
+
+With degree 3, each node holds 2 to 5 keys. With degree 64 (production-level), each node holds up to 127 keys. Higher degree means a wider, shallower tree — fewer disk reads to reach any key.
+
+When a node is full and we need to insert, the tree has to **redistribute**. This is where things get interesting.
+
+## Insert
+
+Let's say we want to insert a key `k` into this B-Tree of degree 2 (max 3 keys per node):
+
+```
+            [ 10 | 20 ]
+           /     |     \
+     [ 5 | 7 ] [15]  [25 | 30]
+```
+
+**Best case** — the leaf node has room. Inserting `17` goes into `[15]`, which becomes `[15 | 17]`. Done.
+
+```
+            [ 10 | 20 ]
+           /     |     \
+     [ 5 | 7 ] [15|17]  [25 | 30]
+```
+
+**Node is full** — this is where splitting happens. Say we insert `6` into `[5 | 7]` which is already at max capacity (degree 2, max 3 keys). The node becomes overfull:
+
+```
+Step 1: Insert into the leaf
+     [ 5 | 6 | 7 ]    <- full!
+
+Step 2: Split at the median (6), push median up to parent
+            [ 6 | 10 | 20 ]
+           /    |     |     \
+         [5]  [7]   [15]  [25 | 30]
+```
+
+The median key (6) moves up to the parent. The node splits in half — keys less than the median go left, keys greater go right.
+
+**What if the parent is also full?** The split cascades upward. The parent splits the same way, pushing its median up. In the worst case, the root itself splits, and the tree grows one level taller. This is how B-Trees stay balanced — they grow from the top, not the bottom.
+
+### The Proactive Split Trick
+
+There's a subtlety in how we implement this. Instead of inserting first and then splitting on the way back up, we **split full nodes on the way down**. As we traverse from root to leaf looking for the insert position, if we encounter a full node, we split it immediately — before going deeper.
+
+This means by the time we reach the leaf, we're guaranteed it has room. No need to walk back up the tree. One pass down, done.
+
+```
+Proactive approach (single pass down):
+
+   Descending to insert key...
+   -> Node full? Split it now.
+   -> Keep going down.
+   -> Reach leaf. It has room. Insert. Done.
+
+Reactive approach (would need two passes):
+
+   Descend to leaf.
+   -> Leaf full? Split. Push median up.
+   -> Parent full? Split. Push median up.
+   -> Walk all the way back up...
+```
+
+This is the approach our implementation uses, and it's what most textbook B-Trees do (from Cormen's *Introduction to Algorithms*).
+
+## Delete
+
+Delete is the most complex operation. There are three cases to handle:
+
+### Case 1: Key is in a leaf node
+
+The simplest case. Just remove it. But if the node drops below the minimum number of keys (`t - 1`), we need to fix it.
+
+```
+Before: delete 7 from leaf
+            [ 10 | 20 ]
+           /     |     \
+     [ 5 | 7 ] [15]  [25 | 30]
+
+After: simple removal
+            [ 10 | 20 ]
+           /     |     \
+        [5]    [15]  [25 | 30]
+```
+
+### Case 2: Key is in an internal node
+
+We can't just remove a key from an internal node — it's a separator between children. Instead, we replace it with either:
+
+- The **predecessor** (largest key in the left child subtree), or
+- The **successor** (smallest key in the right child subtree)
+
+Then delete the predecessor/successor from the leaf where it lived.
+
+```
+Before: delete 10 (internal node)
+            [ 10 | 20 ]
+           /     |     \
+     [ 5 | 7 ] [15]  [25 | 30]
+
+Replace 10 with predecessor (7):
+            [ 7 | 20 ]
+           /    |     \
+        [5]   [15]  [25 | 30]
+```
+
+### Case 3: Node is too small after deletion
+
+If a node drops below the minimum, we try to fix it:
+
+1. **Borrow from right sibling** — if the right sibling has extra keys, rotate one through the parent
+2. **Borrow from left sibling** — same thing, other direction
+3. **Merge** — if both siblings are at minimum, merge the node with a sibling and pull down the separator key from the parent
+
+```
+Borrow from right sibling:
+Before:                         After:
+    [ 10 ]                        [ 15 ]
+   /      \                      /      \
+ [5]    [15|20|25]            [5|10]   [20|25]
+
+Merge (both siblings at minimum):
+Before:                         After:
+    [ 10 ]
+   /      \                    [5|10|15]
+ [5]     [15]
+```
+
+The merge might cascade — if the parent drops below minimum too, the same fix-up applies all the way to the root.
+
+## Think About It
+
+Before moving on, here are some questions worth sitting with. These are the kinds of things that deepen your understanding beyond just "how does it work" to "why was it designed this way."
+
+1. On delete, we borrow from siblings to avoid merging. Why don't we do the same on insert — borrow to siblings to avoid splitting?
+2. What happens if you use a B-Tree with degree 1?
+3. Why do all leaves in a B-Tree sit at the same depth?
+
+## Next Up
+
+The B-Tree works great in memory, but everything is gone when the program exits. In Part 3, we'll build the **disk persistence layer** — a page-based storage system, a disk manager for file I/O, and a buffer pool that caches pages in memory. This is where the database starts feeling real.
+
+---
+
+*[Source code on GitHub](https://github.com/itssidhere/gatidb)*
