@@ -71,19 +71,6 @@ export const DATA = {
         "Built a real-time streaming pipeline from MySQL to ClickHouse via Kafka as part of an IRAP-funded initiative. Transitioned into the core product team where I reduced P95 latency from 20 seconds to 600ms, directly improving reliability and user experience across the platform.",
     },
     {
-      company: "Data Trei, Stealth Startup",
-      href: "https://datatrei.com/",
-      badges: [],
-      location: "Remote",
-      title: "Software Engineer",
-      logoUrl: "/datatrei.png",
-      start: "Sept 2024",
-      end: "Nov 2024",
-      description:
-        "Building the next generation of AI-powered log analysis platform. A copilot for cybersecurity operations.",
-    },
-
-    {
       company: "C-Tribe",
       href: "https://www.ctribefestival.com/",
       badges: [],
@@ -91,7 +78,7 @@ export const DATA = {
       title: "Software Engineer, Team Lead",
       logoUrl: "/ctribe.png",
       start: "Jan 2024",
-      end: "Current",
+      end: "Nov 2024",
       description:
         "At C-Tribe, I lead the development of our event app, focusing on integrating features like search, notifications, schedule views, and user profiles. I manage a team of three interns, ensuring seamless collaboration and efficient project execution, enhancing user experience through innovative solutions.",
     },
