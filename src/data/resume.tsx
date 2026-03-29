@@ -9,7 +9,7 @@ export const DATA = {
   description:
     "Software Engineer and Solopreneur. I love building things and helping people.",
   summary:
-    "The turning point in my life came when I built my first consumer-facing app. This experience profoundly changed and humbled my understanding of the possibilities available as a software engineer. It inspired me to pursue a master's degree in computer science, and I've since had the pleasure of contributing to fast-growing startups, both as a leader and an engineer.",
+    "I broke my mom's computer in grade 1 and spent the next two decades trying to understand how the thing actually works. That curiosity took me from hunting DLL files on a Nokia with 2G internet to launching a social media app with 400K+ downloads that funded my Master's in Canada. These days I build data pipelines, AI agents, and [databases from scratch](https://heysid.io/blog/building-a-database-part-1) — still chasing the same feeling I got when I first pressed F1 on that boot screen.",
   avatarUrl: "/me.png",
   skills: [
     "React",
@@ -60,7 +60,7 @@ export const DATA = {
       href: "https://ironsight.app/",
       badges: [],
       location: "Hybrid",
-      title: "Intermediate Software Engineer",
+      title: "Software Engineer, Team Lead",
       logoUrl: "/ironsight.png",
       start: "Dec 2024",
       end: "Current",
