@@ -30,6 +30,9 @@ export const DATA = {
     "FastAPI",
     "LangChain",
     "LangGraph",
+    "MySQL",
+    "Vue",
+    ".NET",
   ],
   contact: {
     email: "sidjha0001@gmail.com",
