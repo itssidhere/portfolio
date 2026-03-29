@@ -3,6 +3,7 @@ import { DATA } from "@/data/resume";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export async function generateMetadata({
@@ -83,6 +84,12 @@ export default async function Blog({
           }),
         }}
       />
+      <Link
+        href="/blog"
+        className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mb-4"
+      >
+        &larr; Back to blog
+      </Link>
       <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
         {post.metadata.title}
       </h1>
