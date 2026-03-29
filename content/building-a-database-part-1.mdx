@@ -1,0 +1,84 @@
+---
+title: "I'm Building a Relational Database from Scratch in Rust"
+publishedAt: "2026-03-29"
+summary: "From breaking my mom's computer in grade 1 to building a MySQL alternative from zero — this is why I started gatidb."
+---
+
+## The Kid Who Broke His Computer
+
+When I was in grade 1, I broke my mom's computer by — from what I remember — moving the mouse too fast in MS Paint. She was very skeptical of giving me any kind of PC after that. PCs used to be expensive, and I grew up in a lower middle class family.
+
+My school had computers, but I was always the one with the least fluency — no PC in my day-to-day life. I kept asking my parents for one. After 4 years of begging, they finally gave in.
+
+I got my first computer in 5th grade. My parents surprised me back in 2010 — they could barely afford it, but they made it happen. The first thought that came to my mind? *Finally I can play games.* I was no longer the outcast among my friends who knew what "RAM" was, how to install a game, what Windows is.
+
+As a kid who was average in everything, I started borrowing game CDs from friends. One day while installing HULK, I thought I broke my machine. The computer I kept constantly asking my parents for — the one they could barely afford — broken in under a month?
+
+I felt terrible. I started doing the only thing I knew: turning it off and on again. Every restart would flash "Press F1 to see boot options." I never caught it the first time. But after restarting my machine almost 500 times, I finally read what it said.
+
+I pressed F1, saw the options, and realized the game CD was selected as the boot device. All I had to do was switch it back to the hard disk drive where Windows was installed. And voila — I fixed my computer.
+
+I gave up on HULK and moved on to the hot game of the time — **GTA San Andreas**. I heard installing it was tough. My friends described the process so dramatically I almost didn't try. But I went for it anyway.
+
+That was the first time I saw DLL errors. I had no regular internet access — the only thing with a connection was my mom's Nokia 7230 with a 2G data plan. I searched for the exact DLL error on that tiny screen and found an article with a download link for the missing file.
+
+I downloaded it onto my mom's phone, moved it through a dongle and a memory card over to my machine, copied it into System32, and restarted the installation. Voila — another DLL error. But this time, I knew what to do.
+
+In about two weeks, without any adult supervision, I managed to install the game. I started getting popular among my friends. I was the one who could tame this scary machine that everyone was afraid to break.
+
+Then came installing Windows. One day, the technician who upgraded my PC from Windows XP to Vista forgot his bootable CD. I knew what to do — worst case, he's coming back for his CD anyway, he might as well fix a broken OS install.
+
+I pressed F1, selected the CD, and started the installation. Installed it under D: instead of C:. I immediately started fresh — I knew where I went wrong. And just like that, I learned how to install Windows without breaking the computer. I was in 7th standard and on cloud nine. Forget Rockstar Games — I AM the rockstar.
+
+## From Rockstar to Lost
+
+Soon I was the computer guy among my friends and family. But the shallow knowledge started to feel hollow — I wanted to learn *more*. How do computers actually work? What are programming languages?
+
+I connected my mom's phone to the computer through Nokia PC Suite and got the internet working. I searched for programming tutorials, found Python, and started learning through Codecademy.
+
+Fast forward to 2019. During my Bachelor's, I launched my first startup — a social media app that now has over 400K downloads. For a kid from a lower middle class family, what that app gave me felt like a dream. It funded my Master's degree in Canada, paid my rent, and opened doors I never thought I'd walk through. This machine that I once broke in grade 1 had quietly changed the trajectory of my life.
+
+Under the hood, I used Firestore and SQLite. Firestore handled most of the scaling seamlessly — change data capture, realtime snapshots, all taken care of. But I was always under the pressure of shipping code. When you're the only one handling that volume of traffic, there's always something to do.
+
+And somewhere in that rush, I lost my compass.
+
+I stopped diving deep into the things I was curious about. I forgot why I got into computer science in the first place. Was it all about shipping products? Or was there a part of me that was deeply into the art of computer science itself?
+
+Then the kid inside me started speaking up. *This is not how we play. I don't see DLL errors anymore. Everything is sorted. I want to go back to basics.*
+
+## What Is a Database, Actually?
+
+That kid who restarted his computer 500 times to read a boot message, who hunted for DLL files on a Nokia with 2G — he didn't care about shipping. He was curious. He wanted to understand how things work.
+
+So I asked myself: I've used databases my entire career — PostgreSQL, MySQL, MongoDB — but do I actually understand what happens after `SELECT * FROM users WHERE id = 1`? How does it find that row so fast among millions? Where does it live on disk? What happens if the power goes out mid-write?
+
+I decided to find out. Not by reading docs. By building one.
+
+Not a toy key-value store. Not a wrapper around SQLite. A real relational database management system — with B-Tree indexes, disk persistence, a buffer pool, a type system, and a SQL parser. I'm calling it **gatidb**.
+
+## The Plan
+
+I'm using MySQL's InnoDB storage engine as my reference — I literally cloned the [MySQL source code](https://github.com/mysql/mysql-server) and I'm reading their C++ implementation alongside building mine in Rust.
+
+Here's what a real database needs:
+
+1. **B-Tree Engine** — The core data structure that powers lookups in O(log n) time
+2. **Disk Persistence** — A page-based storage layer so data survives restarts
+3. **Buffer Pool** — An in-memory cache so we're not hitting disk on every read
+4. **Table & Schema Layer** — Data types, row encoding, column definitions
+5. **System Catalog** — A data dictionary that tracks all tables and their metadata
+6. **SQL Parser** — So you can type real SQL instead of Rust code
+7. **Write-Ahead Log** — Crash recovery, like InnoDB's redo log
+8. **Joins & Query Planning** — Multi-table queries
+
+Each one gets its own post. I'll explain what the component does, why it's needed, how I built it in Rust, and how MySQL does the same thing — with references to the actual InnoDB source code.
+
+## Next Up
+
+In Part 2, I'll dive into the foundation of every database index: the **B-Tree**. Why databases don't use hash maps, how binary search makes lookups fast, and how gatidb benchmarks against MySQL.
+
+See you there.
+
+---
+
+*[Source code on GitHub](https://github.com/itssidhere/gatidb)*
