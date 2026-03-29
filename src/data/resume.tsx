@@ -65,7 +65,7 @@ export const DATA = {
       start: "Dec 2024",
       end: "Current",
       description:
-        "Developed a high-performance real-time data pipeline using MySQL, Kafka, and ClickHouse, improving data ingestion speed by 35%. Built an innovative Text-to-SQL AI agent that enables natural language queries, cutting query development time in half for non-technical users. Engineered scalable data workflows to enhance real-time analytics capabilities across the organization.",
+        "Built a real-time streaming pipeline from MySQL to ClickHouse via Kafka as part of an IRAP-funded initiative. Transitioned into the core product team where I reduced P95 latency from 20 seconds to 600ms, directly improving reliability and user experience across the platform.",
     },
     {
       company: "Data Trei, Stealth Startup",
