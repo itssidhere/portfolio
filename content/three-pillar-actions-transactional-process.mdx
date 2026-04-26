@@ -1,0 +1,31 @@
+---
+title: "The Three Pillar Actions of a Transactional Process"
+publishedAt: "2026-04-25"
+summary: "Unprotected actions, protected actions, and real-world actions — the three building blocks every transactional system has to reason about."
+---
+
+## Intro
+
+A transactional process guarantees ACID, but no system is truly atomic — not even at the hardware level. When you write a disk block, there's no guarantee it actually lands: the block can be corrupted, the hardware can fault, the power can cut out mid-write. So how does a transactional system reason about ACID? How does it actually deliver on the contract?
+
+## Unprotected Action
+
+This layer is outside of software's control — it relies entirely on the manufacturer and doesn't guarantee any reliability. Anything can go wrong, even if rarely: a disk block can get corrupted, a disk can spill, and any number of other hardware faults can occur.
+
+We want this layer to fail fast (more on why in the next article), so that once it does, the next layer can work on repairing the data.
+
+## Protected Action
+
+A protected action encapsulates the Unprotected action and ensures that the state of the system stays consistent with what's expected. A simple example: when we write a data block, we write it to two different places on the disk. After writing, the protected action reads both back to confirm the write was successful — if not, it retries up to a set number of times. When reading, if it detects that one place has corrupted data, we use the data from the other and patch the first, relying on the Unprotected action to fail fast.
+
+## Real-World Action
+
+These are the real-world consequences of the state produced by a protected action — consequences that can't be undone, or at least are very hard to. For example, if a protected action results in digging a hole in the real world, it can't be undone easily.
+
+## Putting Them Together
+
+The analogy I like: a skydiver (protected action) checks his parachute (Unprotected action) before committing to a real-world action (jumping from the plane).
+
+## Closing
+
+These types of actions might seem simple at first glance, but they are the building blocks of a transactional process.
